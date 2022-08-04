@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3>Find a Player to Battle!</h3>
+    {% for t in team %}
+    <a class="card text-decoration-none text-dark" style="width: 18rem;" href="{{ url_for('poke.showMyTeam', team_id=t.id) }}">
+            <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpurepng.com%2Fpublic%2Fuploads%2Flarge%2Fpurepng.com-pokeballpokeballdevicepokemon-ballpokemon-capture-ball-17015278258617bdog.png&f=1&nofb=1" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">Team {{ t.id }}</h5>
+            <p class="card-text">{{ t.pokemon1 }}</p>
+            <p class="card-text">{{ t.pokemon2 }}</p>
+            <p class="card-text">{{ t.pokemon3 }}</p>
+            <p class="card-text">{{ t.pokemon4 }}</p>
+            <p class="card-text">{{ t.pokemon5 }}</p>
+            {% if current_user.id == team.user_id %}
+            <a href="{{ url_for('poke.editTeam', team_id=t.id) }}" class="btn btn-success">Edit</a>
+            <a href="#" class="btn btn-danger">Delete</a>
+            {% endif %}
+            </div>
+        </a>
+
+    {% endfor %}
+
+{% endblock %}

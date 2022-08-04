@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h3>Create Your Pokémon Team!</h3>
+    <form class="container" method="POST">
+        {{ form.hidden_tag() }}
+
+        {{ form.pokemon1(class='form-control', placeholder='Pokémon 1', autocomplete='off') }}
+        {{ form.pokemon2(class='form-control', placeholder='Pokémon 2', autocomplete='off') }}
+        {{ form.pokemon3(class='form-control', placeholder='Pokémon 3', autocomplete='off') }}
+        {{ form.pokemon4(class='form-control', placeholder='Pokémon 4', autocomplete='off') }}
+        {{ form.pokemon5(class='form-control', placeholder='Pokémon 5', autocomplete='off') }}
+        {{ form.submit(class='btn btn-success') }}
+    </form>
+
+{% endblock %}

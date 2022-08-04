@@ -1,0 +1,71 @@
+body {
+    background-color: grey;
+    background-image: url("https://www.pixelstalk.net/wp-content/uploads/2016/07/Pokeball-Desktop-Wallpapers-768x432.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Code Pro', monospace;
+    font-family: 'Space Mono', monospace;
+}
+
+div {
+    margin: auto;
+    text-align: center;
+  }
+
+a .card {
+    margin: auto;
+    text-align: center;
+}
+
+.btn {
+    margin-top: 1rem;
+}
+
+.deleteBtn {
+  margin: 1rem;
+}
+
+.navbar {
+  background-color: rgb(32, 59, 96);
+}
+
+h1{
+  color:black;
+  padding-top: 100px;
+}
+
+h2 {
+    padding-top: 100px;
+    color: black;
+}
+
+h4 {
+  color: black;
+}
+
+li {
+  list-style: none;
+}
+
+.navbar a:hover {
+  color: yellow;
+}
+
+.deleted a:hover {
+  color: yellow;
+}
+
+a:link, a:visited {
+    color: black;
+    text-decoration: none;
+    cursor: auto;
+  }
+
+.nav-link {
+  color: white;
+}
+
+.deleted {
+  font-size: larger;
+}

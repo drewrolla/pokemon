@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <h1>Enter Pokémon name (all lowercase).</h1>
+        <form class="container" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.poke_name(class='form-control', placeholder='Pokémon', autocomplete='off') }}
+            {{ form.submit(class='btn btn-success') }}
+        </form>
+        {% if pokemon %}
+        <div class="card" style="width: 18rem;">
+            <img src="{{ pokemon.img_url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{ pokemon.name.title() }}</h5>
+                <strong>Ability: {{ pokemon.ability }}</strong>
+                <li>HP: {{ pokemon.hp }}</li>
+                <li>ATK: {{ pokemon.attack }}</li>
+                <li>DEF: {{ pokemon.defense }}</li>
+            </div>
+        </div>
+        {% endif %}
+
+{% endblock %}
