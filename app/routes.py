@@ -6,6 +6,10 @@ from flask import render_template
 def index():
     return render_template('index.html')
 
+@app.route('/welcome')
+def welcome():
+    return render_template('welcome.html')
+
 # class notes
 # def index():
 #     staff = [{'name': 'andrew', 'img': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/800px-SNice.svg.png', 'age': '9000'}, {'name': 'wesley', 'img': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/800px-SNice.svg.png', 'age': '9001'}, {'name': 'whiskey', 'img': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/800px-SNice.svg.png', 'age': '9002'}]

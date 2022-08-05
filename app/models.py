@@ -11,6 +11,11 @@ user_pokemon = db.Table('user_pokemon',
     db.Column('pokemon_id', db.Integer, db.ForeignKey('pokemon.id'))
 )
 
+battling = db.Table('battling',
+    db.Column('battling_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('battler_id', db.Integer, db.ForeignKey('user.id'))
+)
+
 # create our Models
 # db.Models gives us ability to work with database
 # UserMixin helps keep track of who is logged in
@@ -25,11 +30,22 @@ class User(db.Model, UserMixin):
         backref = 'trainers',
         lazy = 'dynamic'
     )
+    fight = db.relationship("User",
+        primaryjoin = (battling.c.battling_id==id),
+        secondaryjoin = (battling.c.battler_id==id),
+        secondary = battling,
+        backref = 'fighters',
+        lazy = 'dynamic'
+    )
 
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
         self.password = generate_password_hash(password)
+
+    def fightUser(self, user):
+        self.fight.append(user)
+        db.session.commit()
 
 class Pokemon(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+{% for g in gym %}
+        <div class="card" style="width: 18rem;">
+            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.OKJB0ZYbFTUVCdfsZHvpEwHaHa%26pid%3DApi&f=1" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{ g.username.title() }}</h5>
+                <a href="{{ url_for('poke.battle', user_id = g.id ) }}" class="card-link btn btn-warning">Battle</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

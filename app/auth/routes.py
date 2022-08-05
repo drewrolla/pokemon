@@ -24,6 +24,7 @@ def logMeIn():
                 if check_password_hash(user.password, password):
                     flash('Log in successful.', 'success')
                     login_user(user)
+                    return redirect(url_for('poke.showTeamPage'))
             else:
                 flash('Incorrect password', 'danger')
             # if user does not exist

@@ -6,21 +6,18 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/pokemon">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/pokemon">Search</a>
-          </li>
           {% if current_user.is_authenticated%}
           <li class="nav-item">
-            <a class="nav-link" href="/team/create">Create</a>
+            <a class="nav-link" href="/pokemon">Search</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/allteams">Other Teams</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/team">My Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/battle">Battle</a>
           </li>
           {% else %}
           {% endif %}
@@ -30,7 +27,8 @@
             </a>
             <ul class="dropdown-menu">
                 {% if current_user.is_authenticated %}
-                <li><a class="dropdown-item" href="#">Edit Account</a></li>
+                <li><a class="dropdown-item" href="/profile">Edit Account</a></li>
+                <li><a class="dropdown-item" href="/profile/delete">Delete Account</a></li>
                 <li><a class="dropdown-item" href="/logout">Log Out</a></li>
                 {% else %}
                 <li><a class="dropdown-item" href="/login">Log In</a></li>
@@ -42,7 +40,7 @@
             {% if current_user.is_authenticated %}
             <p class="nav-link" >Hi {{ current_user.username.title() }}!</p>
             {% else %}
-            <p class="nav-link" >Hello Guest!</p>
+            <p class="nav-link" >Hello Pokémon Trainer!</p>
             {% endif %}
           </li>
         </ul>

@@ -140,8 +140,14 @@ def releasePokemon(pokemon_name):
     return redirect(url_for('poke.getPokemon'))
 
 # battle pokemon
-# @poke.route('/battle/<string:opponent>')
-# def battlePokemon(opponent):
-#     op = User.query(name=opponent)
-#     op.team.all()
+@poke.route('/battle')
+def battlePage():
+    gym = User.query.all()
+    return render_template('battle.html', gym=gym)
 
+@poke.route('/battle/<int:user_id>')
+def battle(user_id):
+    user = User.query.get(user_id)
+    team = user.team.all()
+    current_user.fightUser(user)
+    return render_template('startbattle.html', user=user, team=team)
