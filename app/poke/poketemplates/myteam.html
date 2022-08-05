@@ -5,25 +5,20 @@
         <h3>{{ current_user.username.title() }}'s Pokémon Roster</h3>
     {% endif %}
 
-
-    {% for t in team %}
-        {% if current_user.id == team.user_id %}
-        <a class="card text-decoration-none text-dark" style="width: 18rem;" href="{{ url_for('poke.showMyTeam', team_id=t.id) }}">
-            <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpurepng.com%2Fpublic%2Fuploads%2Flarge%2Fpurepng.com-pokeballpokeballdevicepokemon-ballpokemon-capture-ball-17015278258617bdog.png&f=1&nofb=1" class="card-img-top" alt="...">
-            <div class="card-body">
-            <h5 class="card-title">Team {{ t.id }} - {{ t.trainer.username }}</h5>
-            <p class="card-text">{{ t.pokemon1 }}</p>
-            <p class="card-text">{{ t.pokemon2 }}</p>
-            <p class="card-text">{{ t.pokemon3 }}</p>
-            <p class="card-text">{{ t.pokemon4 }}</p>
-            <p class="card-text">{{ t.pokemon5 }}</p>
-            {% if current_user.id == team.user_id %}
-            <a href="{{ url_for('poke.editTeam', team_id=team.id) }}" class="btn btn-success">Edit</a>
-            <a href="#" class="btn btn-danger">Delete</a>
-            {% endif %}
+    <div class="row">
+        {% for p in team %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{ p.img_url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">{{ p.name.title() }}</h5>
+                    <strong>Ability: {{ p.ability }}</strong>
+                    <li>HP: {{ p.hp }}</li>
+                    <li>ATK: {{ p.attack }}</li>
+                    <li>DEF: {{ p.defense }}</li>
+                </div>
+                    <a href="/release/{{ p.name }}" class="btn btn-danger">release</a>
             </div>
-        </a>
-        {% endif %}
-    {% endfor %}
+        {% endfor %}
+    </div>
 
 {% endblock %}

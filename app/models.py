@@ -5,6 +5,12 @@ from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy() # initializes database
 
+# links Pokemon to User
+user_pokemon = db.Table('user_pokemon',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('pokemon_id', db.Integer, db.ForeignKey('pokemon.id'))
+)
+
 # create our Models
 # db.Models gives us ability to work with database
 # UserMixin helps keep track of who is logged in
@@ -14,11 +20,38 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), nullable=False, unique=True)
     password = db.Column(db.String(300), nullable=False)
     team = db.relationship("Team", backref='trainer', lazy=True) #backref, from the team it will look and see who the trainer/user is
+    team = db.relationship("Pokemon",
+        secondary = user_pokemon,
+        backref = 'trainers',
+        lazy = 'dynamic'
+    )
 
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
         self.password = generate_password_hash(password)
+
+class Pokemon(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), unique=True)
+    ability = db.Column(db.String)
+    img_url = db.Column(db.String)
+    hp = db.Column(db.String)
+    attack = db.Column(db.String)
+    defense = db.Column(db.String)
+
+    def __init__(self, name, ability, img_url, hp, attack, defense):
+        self.name = name
+        self.ability = ability
+        self.img_url = img_url
+        self.hp = hp
+        self.attack = attack
+        self.defense = defense
+    
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
 
 class Team(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -37,3 +70,21 @@ class Team(db.Model):
         self.pokemon4 = pokemon4
         self.pokemon5 = pokemon5
         self.user_id = user_id
+
+    def updateTeam(self, pokemon1, pokemon2, pokemon3, pokemon4, pokemon5):
+        self.pokemon1 = pokemon1
+        self.pokemon2 = pokemon2
+        self.pokemon3 = pokemon3
+        self.pokemon4 = pokemon4
+        self.pokemon5 = pokemon5
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def saveUpdates(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()

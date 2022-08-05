@@ -2,6 +2,7 @@
 
 {% block content %}
     <h3>Find a Player to Battle!</h3>
+    <div class="row">
     {% for t in team %}
     <a class="card text-decoration-none text-dark" style="width: 18rem;" href="{{ url_for('poke.showMyTeam', team_id=t.id) }}">
             <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fpurepng.com%2Fpublic%2Fuploads%2Flarge%2Fpurepng.com-pokeballpokeballdevicepokemon-ballpokemon-capture-ball-17015278258617bdog.png&f=1&nofb=1" class="card-img-top" alt="...">
@@ -20,5 +21,5 @@
         </a>
 
     {% endfor %}
-
+    </div>
 {% endblock %}

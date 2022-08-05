@@ -18,7 +18,13 @@
                 <li>ATK: {{ pokemon.attack }}</li>
                 <li>DEF: {{ pokemon.defense }}</li>
             </div>
+            {% if is_caught %}
+                <a href="/release/{{ pokemon.name }}" class="btn btn-danger">Release</a>
+            {% else %}
+                <a href="/catch/{{ pokemon.name }}" class="btn btn-success">Catch</a>
+            {% endif %}
         </div>
+        
         {% endif %}
 
 {% endblock %}

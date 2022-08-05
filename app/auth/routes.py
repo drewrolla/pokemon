@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .forms import LoginForm, UserCreationForm # goes into .forms (in auth folder) and gets the form
 from werkzeug.security import check_password_hash
 
@@ -22,16 +22,19 @@ def logMeIn():
             user = User.query.filter_by(username=username).first()
             if user:
                 if check_password_hash(user.password, password):
+                    flash('Log in successful.', 'success')
                     login_user(user)
             else:
-                print("Incorrect password.")
+                flash('Incorrect password', 'danger')
             # if user does not exist
-
+        else:
+            flash('Account does not exist.', 'danger')
     return render_template('login.html', form=form)
 
 
 @auth.route('/logout', methods=["GET", "POST"])
 def logMeOut():
+    flash("You've yee'd your last haw.", 'success')
     logout_user()
     return redirect(url_for('auth.logMeIn'))
 
@@ -54,10 +57,10 @@ def SignMeUp():
             db.session.add(user)
             db.session.commit()
 
-
+            flash('Account created.', 'success')
             return redirect(url_for('auth.logMeIn')) # redirects user to the url for the function logMeIn
         else:
-            print('validation failed')
+            flash('Invalid input. Please try again.', 'danger')
     else:
         print('GET req made') # if request is GET, it will return the webpage itself
     return render_template('signup.html', form=form)
